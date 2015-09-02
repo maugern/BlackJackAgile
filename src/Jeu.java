@@ -12,33 +12,33 @@ public class Jeu extends JPanel {
 
 	// Variables de jeu
 	private int nbCartes = 52;
-	//private int[][] sabot = new int[][]();
+	private int[][] sabot = new int[13][4];
 
 	// Composants graphiques
-	JButton sabot = new JButton("Sabot : " + nbCartes);
+	JButton boutonSabot = new JButton("Sabot : " + nbCartes);
 
 	public Jeu(JFrame f) {
 		f.setResizable(false);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setPreferredSize(new Dimension(600, 400));
 
-		sabot.addActionListener(new ActionListener() {
+		boutonSabot.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
 				if (nbCartes > 0) {
 					nbCartes--;
-					sabot.setText("Sabot : " + nbCartes);
+					boutonSabot.setText("Sabot : " + nbCartes);
 
 					// A CHANGER
-					int e;
-					Random r = new Random();
-					e = r.nextInt(2);
-					tirerCarte(valeur, symbole);
+					/*
+					 * int e; Random r = new Random(); e = r.nextInt(2);
+					 * tirerCarte(valeur, symbole);
+					 */
 				}
 			}
 		});
 
-		this.add(sabot);
+		this.add(boutonSabot);
 
 		GroupLayout layout = new GroupLayout(f.getContentPane());
 		f.getContentPane().setLayout(layout);
@@ -60,6 +60,6 @@ public class Jeu extends JPanel {
 	}
 
 	private void initSabot() {
-		
+
 	}
 }
