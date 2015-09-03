@@ -51,10 +51,12 @@ public class Joueur {
 	}
 
 	public void gagneLaManche() {
+		JOptionPane.showMessageDialog (null, "Vous remportez cette manche! /n Vous avez gagné " + mise + "€ !" , "Manche gagné!", JOptionPane.INFORMATION_MESSAGE);
 		setJetons(jetons + mise);
 	}
 
 	public void perdLaManche() {
+		JOptionPane.showMessageDialog (null, "Vous perdez cette manche /n Vous avez perdu " + mise + "€ !" , "Manche perdu!", JOptionPane.INFORMATION_MESSAGE);
 		setJetons(jetons - mise);
 	}
 
