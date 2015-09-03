@@ -14,11 +14,12 @@ public class Joueur {
 	
 	public Joueur(){
 		this.setJetons(10);
-		
+		this.valeurDeLaMain = 0;
 	}
 	
 	public Joueur(int jetons){
 		this.jetons = jetons;
+		this.valeurDeLaMain = 0;
 	}
 	
 	public int getValeurDeLaMain(){
@@ -42,6 +43,14 @@ public class Joueur {
 	
 	public boolean isBlackJack(){
 		return getValeurDeLaMain() == 21;
+	}
+	
+	public void gagneLaManche(){
+		setJetons(jetons + mise);
+	}
+	
+	public void perdLaManche(){
+		setJetons(jetons - mise);
 	}
 
 	public int getJetons() {
@@ -69,8 +78,7 @@ public class Joueur {
 			this.mise = mise;
 		}else{
 			JOptionPane.showMessageDialog(null, "Vous n'avez plus assez d'argent!", "BlackJackAgile", JOptionPane.ERROR_MESSAGE);
-		}
-		
+		}	
 	}
 	
 }
