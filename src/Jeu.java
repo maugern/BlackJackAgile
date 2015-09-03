@@ -19,14 +19,14 @@ public class Jeu {
 			"fond.jpg")));
 	// Tire une nouvelle carte
 	private JButton refresh = new JButton();
-	
-	//Affichage des jetons
+
+	// Affichage des jetons
 	private JLabel score = new JLabel("" + j1.getJetons());
-	
-	//Affichage du score de la main
-	private JLabel scoreMain;
-	
-	//Carte du joueur
+
+	// Affichage du score de la main
+	private JLabel scoreMain = new JLabel();
+
+	// Carte du joueur
 	private Carte carteC1 = new Carte();
 	private Carte carteC2 = new Carte();
 	private Carte carteC3 = new Carte();
@@ -38,9 +38,8 @@ public class Jeu {
 	private JLabel imageC3 = new JLabel();
 	private JLabel imageC4 = new JLabel();
 	private JLabel imageC5 = new JLabel();
-	
-	
-	//Cartes du croupier
+
+	// Cartes du croupier
 	private Carte carteCroupier1 = new Carte();
 	private Carte carteCroupier2 = new Carte();
 	private Carte carteCroupier3 = new Carte();
@@ -52,7 +51,6 @@ public class Jeu {
 	private JLabel imageCroupier3 = new JLabel();
 	private JLabel imageCroupier4 = new JLabel();
 	private JLabel imageCroupier5 = new JLabel();
-	
 
 	/*
 	 * Constructeur principal permettant de lancer le jeu
@@ -63,9 +61,9 @@ public class Jeu {
 
 		for (int i = 0; i < 5; i++) {
 
-			j1.cartes.add(new Carte(i+1,1));
+			j1.cartes.add(new Carte(i + 1, 1));
 
-			j1.listeCarteDuJoueur.add(new Carte(i+1,1));
+			j1.listeCarteDuJoueur.add(new Carte(i + 1, 1));
 
 		}
 
@@ -88,35 +86,37 @@ public class Jeu {
 			public void actionPerformed(ActionEvent e) {
 				if (sabot.size() > 0) {
 					carteC1 = tirer();
-					refreshCarte(carteC1,imageC1);
+					refreshCarte(carteC1, imageC1);
 					carteC2 = tirer();
-					refreshCarte(carteC2,imageC2);
+					refreshCarte(carteC2, imageC2);
 				}
 			}
 		});
-		
-		//Affichage des jetons
+
+		// Affichage des jetons
 		score.setBounds(875, 600, 70, 70);
 		score.setFont(new Font("Helvetica", 0, 48));
 		score.setForeground(Color.WHITE);
 
 		// Gestion de l'image de la premi�re carte
 		carteC1 = tirer();
-		refreshCarte(carteC1,imageC1);
+		refreshCarte(carteC1, imageC1);
 		carteC2 = tirer();
-		refreshCarte(carteC2,imageC2);
+		refreshCarte(carteC2, imageC2);
 		carteCroupier1 = tirer();
 		refreshCarte(carteCroupier1, imageCroupier1);
-		
-		
-		
-		
+
+		scoreMain.setText("" + j1.getValeurDeLaMain());
+		scoreMain.setBounds(100, 400, 70, 70);
+		scoreMain.setFont(new Font("Helvetica", 0, 48));
+		scoreMain.setForeground(Color.WHITE);
+
 		imageC1.setBounds(25, 475, 150, 219);
 		imageC2.setBounds(175, 475, 150, 219);
 		imageC3.setBounds(325, 475, 150, 219);
 		imageC4.setBounds(475, 475, 150, 219);
 		imageC5.setBounds(625, 475, 150, 219);
-		
+
 		imageCroupier1.setBounds(825, 25, 150, 219);
 		imageCroupier2.setBounds(675, 25, 150, 219);
 		imageCroupier3.setBounds(525, 25, 150, 219);
@@ -136,6 +136,7 @@ public class Jeu {
 		f.getContentPane().add(imageCroupier4);
 		f.getContentPane().add(imageCroupier5);
 		f.getContentPane().add(score);
+		f.getContentPane().add(scoreMain);
 		f.getContentPane().add(fond);
 
 		f.pack();
@@ -159,7 +160,7 @@ public class Jeu {
 	 * Rafraichit l'image de la carte
 	 */
 	public void refreshCarte(Carte c, JLabel i) {
-		
+
 		String name = "";
 		if (c.getSymbole() == 0) {
 			name = "Coeur/C";
