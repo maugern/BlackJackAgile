@@ -59,14 +59,6 @@ public class Jeu {
 
 		initSabot();
 
-		for (int i = 0; i < 5; i++) {
-
-			j1.cartes.add(new Carte(i + 1, 1));
-
-			j1.listeCarteDuJoueur.add(new Carte(i + 1, 1));
-
-		}
-
 		// D�finit les param�tres de base de la fen�tre
 		f.setIconImage(new ImageIcon(getClass().getResource("favicon.png"))
 				.getImage());
@@ -85,10 +77,14 @@ public class Jeu {
 
 			public void actionPerformed(ActionEvent e) {
 				if (sabot.size() > 0) {
+					j1.listeCarteDuJoueur = new ArrayList<Carte>();
+
 					carteC1 = tirer();
 					refreshCarte(carteC1, imageC1);
 					carteC2 = tirer();
 					refreshCarte(carteC2, imageC2);
+
+					scoreMain.setText("" + j1.getValeurDeLaMain());
 				}
 			}
 		});
@@ -103,7 +99,7 @@ public class Jeu {
 		refreshCarte(carteC1, imageC1);
 		carteC2 = tirer();
 		refreshCarte(carteC2, imageC2);
-		carteCroupier1 = tirer();
+		carteCroupier1 = tirerCroupier();
 		refreshCarte(carteCroupier1, imageCroupier1);
 
 		scoreMain.setText("" + j1.getValeurDeLaMain());
@@ -151,6 +147,17 @@ public class Jeu {
 		Random r = new Random();
 		int index = r.nextInt(sabot.size());
 		Carte c = sabot.get(index);
+		j1.pioche(c);
+		sabot.remove(index);
+		refresh.setText("Sabot : " + sabot.size());
+		return c;
+	}
+
+	public Carte tirerCroupier() {
+		Random r = new Random();
+		int index = r.nextInt(sabot.size());
+		Carte c = sabot.get(index);
+		// croupier.pioche(c);
 		sabot.remove(index);
 		refresh.setText("Sabot : " + sabot.size());
 		return c;
@@ -182,12 +189,13 @@ public class Jeu {
 	 */
 	public void initSabot() {
 		sabot = new ArrayList<Carte>();
-		for (int i = 0; i < 4; i++) {
-			for (int j = 1; j < 14; j++) {
-				sabot.add(new Carte(j, i));
+		for (int paquets = 0; paquets < 4; paquets++) {
+			for (int i = 0; i < 4; i++) {
+				for (int j = 1; j < 14; j++) {
+					sabot.add(new Carte(j, i));
+				}
 			}
 		}
-
 	}
 
 }
