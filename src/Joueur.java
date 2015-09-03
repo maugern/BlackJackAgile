@@ -38,7 +38,10 @@ public class Joueur {
 	}
 	
 	public void pioche(Carte carte){
-		listeCarteDuJoueur.add(carte);
+		if(listeCarteDuJoueur.size() < 5){
+			listeCarteDuJoueur.add(carte);
+		}
+		
 	}
 	
 	public boolean isBlackJack(){

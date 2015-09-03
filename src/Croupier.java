@@ -27,7 +27,9 @@ public class Croupier {
 	}
 	
 	public void pioche(Carte carte){
-		listeCarteDuCroupier.add(carte);
+		if(listeCarteDuCroupier.size() < 5){
+			listeCarteDuCroupier.add(carte);
+		}
 	}
 	
 	public boolean isBlackJack(){
