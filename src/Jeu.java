@@ -23,6 +23,9 @@ public class Jeu {
 	//Affichage des jetons
 	private JLabel score = new JLabel("" + j1.getJetons());
 	
+	//Affichage du score de la main
+	private JLabel scoreMain;
+	
 	//Carte du joueur
 	private Carte carteC1 = new Carte();
 	private Carte carteC2 = new Carte();
@@ -104,6 +107,8 @@ public class Jeu {
 		refreshCarte(carteC2,imageC2);
 		carteCroupier1 = tirer();
 		refreshCarte(carteCroupier1, imageCroupier1);
+		
+		
 		
 		
 		imageC1.setBounds(25, 475, 150, 219);
