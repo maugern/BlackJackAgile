@@ -6,7 +6,6 @@ public class Joueur {
 
 	private int valeurDeLaMain;
 	private int jetons;
-	public ArrayList<Carte> cartes = new ArrayList<>();
 	private int mise;
 	public ArrayList<Carte> listeCarteDuJoueur = new ArrayList<Carte>();
 

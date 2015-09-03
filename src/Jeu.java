@@ -16,7 +16,7 @@ public class Jeu {
 	private JLabel fond = new JLabel(new ImageIcon(getClass().getResource(
 			"fond.jpg")));
 	// Tire une nouvelle carte
-	private JButton refresh = new JButton();
+	private JButton tirer = new JButton();
 
 	// Affichage des jetons
 	private JLabel score = new JLabel();
@@ -66,24 +66,49 @@ public class Jeu {
 		// Gestion du background
 		fond.setLocation(0, 0);
 
-		// Gestion du bouton refresh
-		refresh.setText("Sabot : " + sabot.size());
-		refresh.setBounds(0, 0, 200, 100);
-		refresh.setBackground(Color.WHITE);
-		refresh.setFocusable(false);
-		refresh.addActionListener(new ActionListener() {
+		// Gestion du bouton tirer
+		tirer.setText("Tirer");
+		tirer.setBounds(0, 0, 200, 100);
+		tirer.setBackground(Color.WHITE);
+		tirer.setFocusable(false);
+		tirer.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				if (sabot.size() > 0) {
-					j1.listeCarteDuJoueur = new ArrayList<Carte>();
-
-					carteC1 = tirer(j1);
-					refreshCarte(carteC1, imageC1);
-					carteC2 = tirer(j1);
-					refreshCarte(carteC2, imageC2);
+				if (carteC3.getValeur() == 0) {
+					
+					carteC3 = tirer(j1);
+					refreshCarte(carteC3, imageC3);
 
 					scoreMain.setText("" + j1.getValeurDeLaMain());
 				}
+				else if(carteC4.getValeur() == 0){
+					
+					carteC4 = tirer(j1);
+					refreshCarte(carteC4, imageC4);
+
+					scoreMain.setText("" + j1.getValeurDeLaMain());
+				}
+				else if(carteC5.getValeur() == 0){
+					
+					carteC5 = tirer(j1);
+					refreshCarte(carteC5, imageC5);
+
+					scoreMain.setText("" + j1.getValeurDeLaMain());
+				}
+				
+				if(j1.getValeurDeLaMain() > 21){
+					f.dispose();
+
+					j1.listeCarteDuJoueur = new ArrayList<Carte>();
+					final JFrame f = new JFrame("BlackJack");
+					
+					javax.swing.SwingUtilities.invokeLater(new Runnable() {
+						public void run() {
+							new Mise(f,j1);
+						}
+					});
+				}
+			
 			}
 		});
 
@@ -94,9 +119,9 @@ public class Jeu {
 		score.setForeground(Color.WHITE);
 
 		// Gestion de l'image de la premi�re carte
-		carteC1 = tirer();
+		carteC1 = tirer(j1);
 		refreshCarte(carteC1, imageC1);
-		carteC2 = tirer();
+		carteC2 = tirer(j1);
 		refreshCarte(carteC2, imageC2);
 		carteCroupier1 = tirer();
 		refreshCarte(carteCroupier1, imageCroupier1);
@@ -119,7 +144,7 @@ public class Jeu {
 		imageCroupier5.setBounds(225, 25, 150, 219);
 
 		// Ajoute tous les composants au panel
-		f.getContentPane().add(refresh);
+		f.getContentPane().add(tirer);
 		f.getContentPane().add(imageC1);
 		f.getContentPane().add(imageC2);
 		f.getContentPane().add(imageC3);
@@ -147,8 +172,6 @@ public class Jeu {
 		int index = r.nextInt(sabot.size());
 		Carte c = sabot.get(index);
 		j1.pioche(c);
-		sabot.remove(index);
-		refresh.setText("Sabot : " + sabot.size());
 		return c;
 	}
 
@@ -157,8 +180,6 @@ public class Jeu {
 		int index = r.nextInt(sabot.size());
 		Carte c = sabot.get(index);
 		// croupier.pioche(c);
-		sabot.remove(index);
-		refresh.setText("Sabot : " + sabot.size());
 		return c;
 	}
 
@@ -188,13 +209,12 @@ public class Jeu {
 	 */
 	public void initSabot() {
 		sabot = new ArrayList<Carte>();
-		for (int paquets = 0; paquets < 4; paquets++) {
-			for (int i = 0; i < 4; i++) {
-				for (int j = 1; j < 14; j++) {
-					sabot.add(new Carte(j, i));
-				}
+		for (int i = 0; i < 4; i++) {
+			for (int j = 1; j < 14; j++) {
+				sabot.add(new Carte(j, i));
 			}
 		}
+
 	}
 
 }
