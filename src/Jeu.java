@@ -20,17 +20,35 @@ public class Jeu {
 	// Tire une nouvelle carte
 	private JButton refresh = new JButton();
 	
+	//Affichage des jetons
+	private JLabel score = new JLabel("" + j1.getJetons());
+	
+	//Carte du joueur
 	private Carte carteC1 = new Carte();
 	private Carte carteC2 = new Carte();
 	private Carte carteC3 = new Carte();
 	private Carte carteC4 = new Carte();
 	private Carte carteC5 = new Carte();
-	// Affiche l'image de la premi�re carte
+	// Affiche l'image des cartes du joueur
 	private JLabel imageC1 = new JLabel();
 	private JLabel imageC2 = new JLabel();
 	private JLabel imageC3 = new JLabel();
 	private JLabel imageC4 = new JLabel();
 	private JLabel imageC5 = new JLabel();
+	
+	
+	//Cartes du croupier
+	private Carte carteCroupier1 = new Carte();
+	private Carte carteCroupier2 = new Carte();
+	private Carte carteCroupier3 = new Carte();
+	private Carte carteCroupier4 = new Carte();
+	private Carte carteCroupier5 = new Carte();
+	// Affiche l'image des cartes du croupier
+	private JLabel imageCroupier1 = new JLabel();
+	private JLabel imageCroupier2 = new JLabel();
+	private JLabel imageCroupier3 = new JLabel();
+	private JLabel imageCroupier4 = new JLabel();
+	private JLabel imageCroupier5 = new JLabel();
 	
 
 	/*
@@ -51,9 +69,7 @@ public class Jeu {
 		// D�finit les param�tres de base de la fen�tre
 		f.setIconImage(new ImageIcon(getClass().getResource("favicon.png"))
 				.getImage());
-		f.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		f.setPreferredSize(new Dimension(1920 / 2, 1080 / 2));
-		f.setMinimumSize(new Dimension(1920 / 4, 1080 / 4));
+		f.setPreferredSize(new Dimension(1000, 750));
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Gestion du background
@@ -75,19 +91,32 @@ public class Jeu {
 				}
 			}
 		});
+		
+		//Affichage des jetons
+		score.setBounds(875, 600, 70, 70);
+		score.setFont(new Font("Helvetica", 0, 48));
+		score.setForeground(Color.WHITE);
 
 		// Gestion de l'image de la premi�re carte
 		carteC1 = tirer();
 		refreshCarte(carteC1,imageC1);
 		carteC2 = tirer();
 		refreshCarte(carteC2,imageC2);
+		carteCroupier1 = tirer();
+		refreshCarte(carteCroupier1, imageCroupier1);
 		
 		
-		imageC1.setBounds(25, 500, 150, 219);
-		imageC2.setBounds(175, 500, 150, 219);
-		imageC3.setBounds(325, 500, 150, 219);
-		imageC4.setBounds(475, 500, 150, 219);
-		imageC5.setBounds(625, 500, 150, 219);
+		imageC1.setBounds(25, 475, 150, 219);
+		imageC2.setBounds(175, 475, 150, 219);
+		imageC3.setBounds(325, 475, 150, 219);
+		imageC4.setBounds(475, 475, 150, 219);
+		imageC5.setBounds(625, 475, 150, 219);
+		
+		imageCroupier1.setBounds(825, 25, 150, 219);
+		imageCroupier2.setBounds(675, 25, 150, 219);
+		imageCroupier3.setBounds(525, 25, 150, 219);
+		imageCroupier4.setBounds(375, 25, 150, 219);
+		imageCroupier5.setBounds(225, 25, 150, 219);
 
 		// Ajoute tous les composants au panel
 		f.getContentPane().add(refresh);
@@ -96,9 +125,16 @@ public class Jeu {
 		f.getContentPane().add(imageC3);
 		f.getContentPane().add(imageC4);
 		f.getContentPane().add(imageC5);
+		f.getContentPane().add(imageCroupier1);
+		f.getContentPane().add(imageCroupier2);
+		f.getContentPane().add(imageCroupier3);
+		f.getContentPane().add(imageCroupier4);
+		f.getContentPane().add(imageCroupier5);
+		f.getContentPane().add(score);
 		f.getContentPane().add(fond);
 
 		f.pack();
+		f.setLocationRelativeTo(null);
 		f.setVisible(true);
 	}
 
