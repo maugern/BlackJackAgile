@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -8,19 +9,29 @@ import javax.swing.*;
 
 public class Jeu {
 
+	private Joueur j1 = new Joueur();
+
 	// Contient toutes les cartes mises en jeu
 	private ArrayList<Carte> sabot = new ArrayList<Carte>();
 
 	// D�finit l'arri�re-plan de la fen�tre de jeu
 	private JLabel fond = new JLabel(new ImageIcon(getClass().getResource(
 			"fond.jpg")));
-	// Associe une nouvelle valeur au label c1
+	// Tire une nouvelle carte
 	private JButton refresh = new JButton();
-	// Affiche la valeur et le symbole de la premi�re carte tir�e
-	private JLabel c1 = new JLabel();
-	private Carte carteC1;
+	
+	private Carte carteC1 = new Carte();
+	private Carte carteC2 = new Carte();
+	private Carte carteC3 = new Carte();
+	private Carte carteC4 = new Carte();
+	private Carte carteC5 = new Carte();
 	// Affiche l'image de la premi�re carte
 	private JLabel imageC1 = new JLabel();
+	private JLabel imageC2 = new JLabel();
+	private JLabel imageC3 = new JLabel();
+	private JLabel imageC4 = new JLabel();
+	private JLabel imageC5 = new JLabel();
+	
 
 	/*
 	 * Constructeur principal permettant de lancer le jeu
@@ -28,6 +39,10 @@ public class Jeu {
 	public Jeu(final JFrame f) {
 
 		initSabot();
+
+		for (int i = 0; i < 5; i++) {
+			j1.listeCarteDuJoueur.add(new Carte(i+1,1));
+		}
 
 		// D�finit les param�tres de base de la fen�tre
 		f.setIconImage(new ImageIcon(getClass().getResource("favicon.png"))
@@ -49,27 +64,34 @@ public class Jeu {
 
 			public void actionPerformed(ActionEvent e) {
 				if (sabot.size() > 0) {
-					setValue(c1);
-					refreshCarte();
+					carteC1 = tirer();
+					refreshCarte(carteC1,imageC1);
+					carteC2 = tirer();
+					refreshCarte(carteC2,imageC2);
 				}
 			}
 		});
 
-		// Gestion de la premi�re carte
-		setValue(c1);
-		c1.setFont(new Font("Oswald", 0, f.getWidth() / 14));
-		c1.setForeground(Color.WHITE);
-		c1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		c1.setBounds(0, (f.getHeight() / 4) * 3, f.getWidth(), 75);
-
 		// Gestion de l'image de la premi�re carte
-		refreshCarte();
+		carteC1 = tirer();
+		refreshCarte(carteC1,imageC1);
+		carteC2 = tirer();
+		refreshCarte(carteC2,imageC2);
+		
+		
 		imageC1.setBounds(25, 500, 150, 219);
+		imageC2.setBounds(175, 500, 150, 219);
+		imageC3.setBounds(325, 500, 150, 219);
+		imageC4.setBounds(475, 500, 150, 219);
+		imageC5.setBounds(625, 500, 150, 219);
 
 		// Ajoute tous les composants au panel
 		f.getContentPane().add(refresh);
-		f.getContentPane().add(c1);
 		f.getContentPane().add(imageC1);
+		f.getContentPane().add(imageC2);
+		f.getContentPane().add(imageC3);
+		f.getContentPane().add(imageC4);
+		f.getContentPane().add(imageC5);
 		f.getContentPane().add(fond);
 
 		f.pack();
@@ -79,35 +101,34 @@ public class Jeu {
 	/*
 	 * Donne au label la valeur d'une carte al�atoire pr�sente dans le sabot
 	 */
-	public void setValue(JLabel l) {
+	public Carte tirer() {
 		Random r = new Random();
-		int c1Value = r.nextInt(sabot.size());
-		Carte c = sabot.get(c1Value);
-		l.setText(c.toString());
-		carteC1 = c;
-		sabot.remove(c1Value);
+		int index = r.nextInt(sabot.size());
+		Carte c = sabot.get(index);
+		sabot.remove(index);
 		refresh.setText("Sabot : " + sabot.size());
-
+		return c;
 	}
 
 	/*
 	 * Rafraichit l'image de la carte
 	 */
-	public void refreshCarte() {
+	public void refreshCarte(Carte c, JLabel i) {
+		
 		String name = "";
-		if (carteC1.getSymbole() == 0) {
+		if (c.getSymbole() == 0) {
 			name = "Coeur/C";
-		} else if (carteC1.getSymbole() == 1) {
+		} else if (c.getSymbole() == 1) {
 			name = "Trefle/T";
-		} else if (carteC1.getSymbole() == 2) {
+		} else if (c.getSymbole() == 2) {
 			name = "Carreau/C";
 		} else {
 			name = "Pique/P";
 		}
 
-		name = name + carteC1.getValeur() + ".png";
+		name = name + c.getValeur() + ".png";
 
-		imageC1.setIcon(new ImageIcon(getClass().getResource(name)));
+		i.setIcon(new ImageIcon(getClass().getResource(name)));
 	}
 
 	/*
@@ -122,6 +143,5 @@ public class Jeu {
 		}
 
 	}
-
 
 }

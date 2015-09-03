@@ -8,7 +8,7 @@ public class Joueur {
 	private int valeurDeLaMain;
 	private int jetons;
 	private int mise;
-	private ArrayList<Carte> listeCarteDuJoueur = new ArrayList<Carte>();
+	public ArrayList<Carte> listeCarteDuJoueur = new ArrayList<Carte>();
 	
 	public Joueur(){
 		this.setJetons(10);
