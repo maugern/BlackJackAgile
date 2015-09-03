@@ -44,4 +44,7 @@ public class Croupier {
 		this.jetons = jetons;
 	}
 	
+	public void setListeCarteDuCroupier(ArrayList<Carte> c){
+		this.listeCarteDuCroupier = c;
+	}
 }
