@@ -1,8 +1,10 @@
+import java.util.ArrayList;
+
 
 public class Joueur {
 
 	private int jetons;
-	public Carte[] cartes = new Carte[5];
+	public ArrayList<Carte> cartes = new ArrayList<>();
 	
 	public Joueur(){
 		this.jetons = 10;

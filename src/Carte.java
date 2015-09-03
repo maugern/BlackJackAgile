@@ -3,6 +3,10 @@ public class Carte {
 	private int valeur;
 	private int symbole;
 
+	public Carte(){
+		
+	}
+	
 	/*
 	 * Cr�er une carte avec la valeur v (comprise entre 1 et 13) et un symbole
 	 * (compris entre 0 et 3)
