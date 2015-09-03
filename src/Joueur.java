@@ -17,6 +17,10 @@ public class Joueur {
 		
 	}
 	
+	public Joueur(int jetons){
+		this.jetons = jetons;
+	}
+	
 	public int getValeurDeLaMain(){
 		for(int i = 0; i < listeCarteDuJoueur.size(); i++){
 			if(listeCarteDuJoueur.get(i).getValeur() == 1){ //si c'est un as
