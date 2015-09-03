@@ -9,8 +9,6 @@ import javax.swing.*;
 
 public class Jeu {
 
-	private Joueur j1 = new Joueur();
-
 	// Contient toutes les cartes mises en jeu
 	private ArrayList<Carte> sabot = new ArrayList<Carte>();
 
@@ -21,7 +19,7 @@ public class Jeu {
 	private JButton refresh = new JButton();
 
 	// Affichage des jetons
-	private JLabel score = new JLabel("" + j1.getJetons());
+	private JLabel score = new JLabel();
 
 	// Affichage du score de la main
 	private JLabel scoreMain = new JLabel();
@@ -55,7 +53,7 @@ public class Jeu {
 	/*
 	 * Constructeur principal permettant de lancer le jeu
 	 */
-	public Jeu(final JFrame f) {
+	public Jeu(final JFrame f, final Joueur j1) {
 
 		initSabot();
 
@@ -79,9 +77,9 @@ public class Jeu {
 				if (sabot.size() > 0) {
 					j1.listeCarteDuJoueur = new ArrayList<Carte>();
 
-					carteC1 = tirer();
+					carteC1 = tirer(j1);
 					refreshCarte(carteC1, imageC1);
-					carteC2 = tirer();
+					carteC2 = tirer(j1);
 					refreshCarte(carteC2, imageC2);
 
 					scoreMain.setText("" + j1.getValeurDeLaMain());
@@ -90,6 +88,7 @@ public class Jeu {
 		});
 
 		// Affichage des jetons
+		score.setText("" + j1.getJetons());
 		score.setBounds(875, 600, 70, 70);
 		score.setFont(new Font("Helvetica", 0, 48));
 		score.setForeground(Color.WHITE);
@@ -99,7 +98,7 @@ public class Jeu {
 		refreshCarte(carteC1, imageC1);
 		carteC2 = tirer();
 		refreshCarte(carteC2, imageC2);
-		carteCroupier1 = tirerCroupier();
+		carteCroupier1 = tirer();
 		refreshCarte(carteCroupier1, imageCroupier1);
 
 		scoreMain.setText("" + j1.getValeurDeLaMain());
@@ -143,7 +142,7 @@ public class Jeu {
 	/*
 	 * Donne au label la valeur d'une carte al�atoire pr�sente dans le sabot
 	 */
-	public Carte tirer() {
+	public Carte tirer(final Joueur j1) {
 		Random r = new Random();
 		int index = r.nextInt(sabot.size());
 		Carte c = sabot.get(index);
@@ -153,7 +152,7 @@ public class Jeu {
 		return c;
 	}
 
-	public Carte tirerCroupier() {
+	public Carte tirer() {
 		Random r = new Random();
 		int index = r.nextInt(sabot.size());
 		Carte c = sabot.get(index);
