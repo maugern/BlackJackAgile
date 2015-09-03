@@ -26,9 +26,14 @@ public class Croupier {
 		return valeurDeLaMain;
 	}
 	
+	public void pioche(Carte carte){
+		listeCarteDuCroupier.add(carte);
+	}
+	
 	public boolean isBlackJack(){
 		return getValeurDeLaMain() == 21;
 	}
+	
 	
 	public int getJetons() {
 		return jetons;

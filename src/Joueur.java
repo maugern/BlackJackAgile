@@ -30,6 +30,10 @@ public class Joueur {
 		return valeurDeLaMain;
 	}
 	
+	public void pioche(Carte carte){
+		listeCarteDuJoueur.add(carte);
+	}
+	
 	public boolean isBlackJack(){
 		return getValeurDeLaMain() == 21;
 	}
