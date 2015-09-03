@@ -18,9 +18,10 @@ public class Jeu {
 	private JButton refresh = new JButton();
 	// Affiche la valeur et le symbole de la premi�re carte tir�e
 	private JLabel c1 = new JLabel();
-	private Carte carteC1;
 	// Affiche l'image de la premi�re carte
 	private JLabel imageC1 = new JLabel();
+	
+	private Joueur j1 = new Joueur();
 
 	/*
 	 * Constructeur principal permettant de lancer le jeu
@@ -54,6 +55,7 @@ public class Jeu {
 				}
 			}
 		});
+		
 
 		// Gestion de la premi�re carte
 		setValue(c1);
@@ -84,7 +86,14 @@ public class Jeu {
 		int c1Value = r.nextInt(sabot.size());
 		Carte c = sabot.get(c1Value);
 		l.setText(c.toString());
-		carteC1 = c;
+		for(int i=0; i<5;i++){
+			if(j1.cartes[i] == null){
+				j1.cartes[i] = c;
+			}
+			else{
+				
+			}
+		}
 		sabot.remove(c1Value);
 		refresh.setText("Sabot : " + sabot.size());
 
