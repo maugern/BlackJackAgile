@@ -1,5 +1,5 @@
 
-public class Joueur {
+public abstract class Joueur {
 	
 	private int money;
 	private int mise;
