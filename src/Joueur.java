@@ -1,21 +1,16 @@
 import java.util.ArrayList;
 
-<<<<<<< HEAD
-=======
 import javax.swing.JOptionPane;
->>>>>>> 2fb553d720a78d392081d24bc31ebace35794372
+
 
 
 public class Joueur {
 	
 	private int valeurDeLaMain;
 	private int jetons;
-<<<<<<< HEAD
 	public ArrayList<Carte> cartes = new ArrayList<>();
-=======
 	private int mise;
 	public ArrayList<Carte> listeCarteDuJoueur = new ArrayList<Carte>();
->>>>>>> 2fb553d720a78d392081d24bc31ebace35794372
 	
 	public Joueur(){
 		this.setJetons(10);
