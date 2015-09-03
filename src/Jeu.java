@@ -41,7 +41,11 @@ public class Jeu {
 		initSabot();
 
 		for (int i = 0; i < 5; i++) {
+<<<<<<< HEAD
 			j1.cartes.add(new Carte(i+1,1));
+=======
+			j1.listeCarteDuJoueur.add(new Carte(i+1,1));
+>>>>>>> 2fb553d720a78d392081d24bc31ebace35794372
 		}
 
 		// D�finit les param�tres de base de la fen�tre
