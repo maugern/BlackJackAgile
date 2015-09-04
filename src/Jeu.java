@@ -210,7 +210,7 @@ public class Jeu {
 		doubler.setBounds(10, 230, 200, 100);
 		doubler.setBackground(Color.WHITE);
 		doubler.setFocusable(false);
-		if (j1.getJetons() + j1.getMise() >= j1.getMise() * 2  ) {
+		if (j1.getJetons() >= j1.getMise() * 2  ) {
 			doubler.addActionListener(new ActionListener() {
 
 				@Override
