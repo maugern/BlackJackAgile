@@ -113,6 +113,22 @@ public class Mise {
 			}
 		});
 
+		texte.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				texte.setFont(new Font("Helvetica", 1, 26));
+				texte.setForeground(Color.ORANGE);
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				texte.setFont(new Font("Helvetica", 1, 24));
+				texte.setForeground(Color.BLACK);
+			}
+
+		});
+
 		f.getContentPane().add(cagnotte);
 
 		if (j1.getJetons() != 0) {
