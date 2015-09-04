@@ -208,7 +208,7 @@ public class Jeu {
 		mise.setText("" + j1.getMise());
 		mise.setBounds(925, 625, 70, 70);
 		if (j1.getMise() > 99) {
-			mise.setBounds(900, 625, 100, 70);
+			mise.setBounds(890, 625, 100, 70);
 		} else if (j1.getMise() > 9) {
 			mise.setBounds(915, 625, 80, 70);
 		}

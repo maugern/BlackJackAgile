@@ -13,7 +13,7 @@ public class Joueur {
 	public ArrayList<Carte> split_2 = new ArrayList<Carte>();
 
 	public Joueur() {
-		this.setJetons(10);
+		this.setJetons(100);
 		this.valeurDeLaMain = 0;
 	}
 
@@ -24,6 +24,7 @@ public class Joueur {
 
 	public int getValeurDeLaMain(){
 		valeurDeLaMain = 0;
+		int compteur = 0;
 		if(isSplit){//nouvelle partie du code
 			int valeur_split1 = 0;
 			int valeur_split2 = 0;
@@ -65,7 +66,29 @@ public class Joueur {
 			
 			
 		}else{ //si il est pas split, on le calcule normalement
-			for(int i = 0; i < listeCarteDuJoueur.size(); i++){
+				
+				for(int i = 0; i < listeCarteDuJoueur.size(); i++){
+					if (listeCarteDuJoueur.get(i).getValeur() == 1) {
+					compteur++;
+				} else 	 if(listeCarteDuJoueur.get(i).getValeur() >= 10){
+						valeurDeLaMain += 10;
+					}
+					
+					else{
+						valeurDeLaMain += listeCarteDuJoueur.get(i).getValeur();
+				}
+			}
+			
+				for(;compteur>0;compteur--) {
+					if(valeurDeLaMain <= 10){ //si la valeur de main est inferieur ou egale a 10, l'as prend pour valeur 11
+					valeurDeLaMain += 11;
+					}else{
+						valeurDeLaMain += 1; //si la valeur de la main est superieur a 10, l'as prend pour valeur 1
+					}
+				}
+				
+			
+			/*for(int i = 0; i < listeCarteDuJoueur.size(); i++){
 				if(listeCarteDuJoueur.get(i).getValeur() == 1){ //si c'est un as
 					if(valeurDeLaMain <= 10){ //si la valeur de main est inferieur ou egale a 10, l'as prend pour valeur 11
 						valeurDeLaMain += 11;
@@ -79,8 +102,8 @@ public class Joueur {
 				else{
 					valeurDeLaMain += listeCarteDuJoueur.get(i).getValeur();
 				}
+			}*/
 			}
-		}
 		return valeurDeLaMain;
 	}
 
