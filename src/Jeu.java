@@ -7,7 +7,10 @@ import java.util.Random;
 import javax.swing.*;
 
 public class Jeu {
-
+	
+	//Création du croupier
+	final Croupier croupier = new Croupier();
+		
 	// Contient toutes les cartes mises en jeu
 	private ArrayList<Carte> sabot = new ArrayList<Carte>();
 
@@ -16,13 +19,16 @@ public class Jeu {
 			"fond.jpg")));
 	// Tire une nouvelle carte
 	private JButton tirer = new JButton();
-
+	
+	// Reste dur la table sans piocher
+	
+	private JButton rester = new JButton("Rester");
 	// Affichage des jetons
 	private JLabel score = new JLabel();
 
 	// Affichage du score de la main
 	private JLabel scoreMain = new JLabel();
-
+	
 	// Carte du joueur
 	private Carte carteC1 = new Carte();
 	private Carte carteC2 = new Carte();
@@ -64,10 +70,24 @@ public class Jeu {
 
 		// Gestion du background
 		fond.setLocation(0, 0);
-
+		
+		//Gestion du bouton Rester
+		rester.setBounds(10, 120, 200, 100);
+		rester.setBackground(Color.WHITE);
+		rester.setFocusable(false);
+		rester.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+			}
+		});
+				
+				
 		// Gestion du bouton tirer
 		tirer.setText("Tirer");
-		tirer.setBounds(0, 0, 200, 100);
+		tirer.setBounds(10, 10, 200, 100);
 		tirer.setBackground(Color.WHITE);
 		tirer.setFocusable(false);
 		tirer.addActionListener(new ActionListener() {
@@ -144,6 +164,7 @@ public class Jeu {
 
 		// Ajoute tous les composants au panel
 		f.getContentPane().add(tirer);
+		f.getContentPane().add(rester);
 		f.getContentPane().add(imageC1);
 		f.getContentPane().add(imageC2);
 		f.getContentPane().add(imageC3);
