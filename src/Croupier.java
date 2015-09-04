@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 
-
 public class Croupier {
 	private int valeurDeLaMain;
 	private int jetons;
@@ -17,7 +16,7 @@ public class Croupier {
 				if(valeurDeLaMain <= 10){ //si la valeur de main est inferieur ou egale a 10, l'as prend pour valeur 11
 					valeurDeLaMain += 11;
 				}else{
-					valeurDeLaMain += 1; //si lad valeur de la main est superieur a 10, l'as prend pour valeur 1
+					valeurDeLaMain += 1; //si la valeur de la main est superieur a 10, l'as prend pour valeur 1
 				}
 			}else{
 				valeurDeLaMain += listeCarteDuCroupier.get(i).getValeur();
