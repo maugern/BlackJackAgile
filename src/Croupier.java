@@ -25,11 +25,13 @@ public class Croupier {
 		}
 	}
 	
-		for(;compteur>0;compteur--) {
+		for(int i = compteur ; i >0;i--) {
 			if(valeurDeLaMain <= 10){ //si la valeur de main est inferieur ou egale a 10, l'as prend pour valeur 11
 			valeurDeLaMain += 11;
 			}else{
 				valeurDeLaMain += 1; //si la valeur de la main est superieur a 10, l'as prend pour valeur 1
+				if(valeurDeLaMain > 21 && compteur > 1)
+					valeurDeLaMain -= 10;
 			}
 		}
 		
