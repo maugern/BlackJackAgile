@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -98,7 +97,7 @@ public class Jeu {
 				
 				if(j1.getValeurDeLaMain() > 21){
 					f.dispose();
-
+					j1.perdLaManche();
 					j1.listeCarteDuJoueur = new ArrayList<Carte>();
 					final JFrame f = new JFrame("BlackJack");
 					
