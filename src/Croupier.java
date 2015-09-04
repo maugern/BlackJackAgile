@@ -4,71 +4,69 @@ public class Croupier {
 	private int valeurDeLaMain;
 	private int jetons;
 	private ArrayList<Carte> listeCarteDuCroupier = new ArrayList<Carte>();
-	
-	public Croupier(){
-		this.setJetons((int) Double.POSITIVE_INFINITY); //La banque a argent infinit
+
+	public Croupier() {
+		this.setJetons((int) Double.POSITIVE_INFINITY); // La banque a argent
+														// infinit
 		this.valeurDeLaMain = 0;
 	}
-	
-	public int getValeurDeLaMain(){
+
+	public int getValeurDeLaMain() {
 		valeurDeLaMain = 0;
-		int compteur =0;
-		for(int i = 0; i < listeCarteDuCroupier.size(); i++){
+		int compteur = 0;
+		for (int i = 0; i < listeCarteDuCroupier.size(); i++) {
 			if (listeCarteDuCroupier.get(i).getValeur() == 1) {
-			compteur++;
-		} else 	 if(listeCarteDuCroupier.get(i).getValeur() >= 10){
+				compteur++;
+			} else if (listeCarteDuCroupier.get(i).getValeur() >= 10) {
 				valeurDeLaMain += 10;
 			}
-			
-			else{
+
+			else {
 				valeurDeLaMain += listeCarteDuCroupier.get(i).getValeur();
+			}
 		}
-	}
-	
-		for(int i = compteur ; i >0;i--) {
-			if(valeurDeLaMain <= 10){ //si la valeur de main est inferieur ou egale a 10, l'as prend pour valeur 11
-			valeurDeLaMain += 11;
-			}else{
-				valeurDeLaMain += 1; //si la valeur de la main est superieur a 10, l'as prend pour valeur 1
-				if(valeurDeLaMain > 21 && compteur > 1)
+
+		for (int i = compteur; i > 0; i--) {
+			if (valeurDeLaMain <= 10) { // si la valeur de main est inferieur ou
+										// egale a 10, l'as prend pour valeur 11
+				valeurDeLaMain += 11;
+			} else {
+				valeurDeLaMain += 1; // si la valeur de la main est superieur a
+										// 10, l'as prend pour valeur 1
+				if (valeurDeLaMain > 21 && compteur > 1)
 					valeurDeLaMain -= 10;
 			}
 		}
-		
-		
-		/*for(int i = 0; i < listeCarteDuCroupier.size(); i++){
-			if(listeCarteDuCroupier.get(i).getValeur() == 1){ //si c'est un as
-				if(valeurDeLaMain <= 10){ //si la valeur de main est inferieur ou egale a 10, l'as prend pour valeur 11
-					valeurDeLaMain += 11;
-				}else{
-					valeurDeLaMain += 1; //si la valeur de la main est superieur a 10, l'as prend pour valeur 1
-				}
-			}else if(listeCarteDuCroupier.get(i).getValeur() >= 10){
-				valeurDeLaMain += 10;
-			}
-			
-			else{
-				valeurDeLaMain += listeCarteDuCroupier.get(i).getValeur();
-			}
-		}*/
+
+		/*
+		 * for(int i = 0; i < listeCarteDuCroupier.size(); i++){
+		 * if(listeCarteDuCroupier.get(i).getValeur() == 1){ //si c'est un as
+		 * if(valeurDeLaMain <= 10){ //si la valeur de main est inferieur ou
+		 * egale a 10, l'as prend pour valeur 11 valeurDeLaMain += 11; }else{
+		 * valeurDeLaMain += 1; //si la valeur de la main est superieur a 10,
+		 * l'as prend pour valeur 1 } }else
+		 * if(listeCarteDuCroupier.get(i).getValeur() >= 10){ valeurDeLaMain +=
+		 * 10; }
+		 * 
+		 * else{ valeurDeLaMain += listeCarteDuCroupier.get(i).getValeur(); } }
+		 */
 		return valeurDeLaMain;
 	}
-	
-	public void pioche(Carte carte){
-		if(listeCarteDuCroupier.size() < 5){
+
+	public void pioche(Carte carte) {
+		if (listeCarteDuCroupier.size() < 5) {
 			listeCarteDuCroupier.add(carte);
 		}
 	}
-	
+
 	public ArrayList<Carte> getListeCarteDuCroupier() {
 		return listeCarteDuCroupier;
 	}
 
-	
-	public boolean isBlackJack(){
+	public boolean isBlackJack() {
 		return getValeurDeLaMain() == 21;
 	}
-	
+
 	public int getJetons() {
 		return jetons;
 	}
@@ -76,8 +74,8 @@ public class Croupier {
 	public void setJetons(int jetons) {
 		this.jetons = jetons;
 	}
-	
-	public void setListeCarteDuCroupier(ArrayList<Carte> c){
+
+	public void setListeCarteDuCroupier(ArrayList<Carte> c) {
 		this.listeCarteDuCroupier = c;
 	}
 }

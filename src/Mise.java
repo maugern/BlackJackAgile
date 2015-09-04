@@ -138,10 +138,10 @@ public class Mise {
 			f.getContentPane().add(diminuer);
 		} else {
 			f.setLayout(new GridLayout(3, 1));
-			JLabel banniere = new JLabel(new ImageIcon(getClass()
-					.getResource("banniere.png")));
-			JLabel banniere2 = new JLabel(new ImageIcon(getClass()
-					.getResource("banniere.gif")));
+			JLabel banniere = new JLabel(new ImageIcon(getClass().getResource(
+					"banniere.png")));
+			JLabel banniere2 = new JLabel(new ImageIcon(getClass().getResource(
+					"banniere.gif")));
 			f.getContentPane().add(banniere);
 			f.getContentPane().add(banniere2);
 		}

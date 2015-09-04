@@ -210,36 +210,40 @@ public class Jeu {
 		doubler.setBounds(10, 230, 200, 100);
 		doubler.setBackground(Color.WHITE);
 		doubler.setFocusable(false);
-		doubler.addActionListener(new ActionListener() {
+		if (j1.getMise() * 2 <= j1.getJetons()) {
+			doubler.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
 
-				carteC3 = tirer(j1);
-				refreshCarte(carteC3, imageC3);
+					carteC3 = tirer(j1);
+					refreshCarte(carteC3, imageC3);
 
-				scoreMain.setText("" + j1.getValeurDeLaMain());
-
-				if (j1.getValeurDeLaMain() > 21) {
-					j1.setJetons(j1.getJetons()-j1.getMise());
 					j1.setMise(j1.getMise() * 2);
-					j1.perdLaManche();
-					f.dispose();
-					j1.listeCarteDuJoueur = new ArrayList<Carte>();
-					final JFrame f = new JFrame("BlackJack");
+					mise.setText("" + j1.getMise());
 
-					javax.swing.SwingUtilities.invokeLater(new Runnable() {
-						public void run() {
-							new Mise(f, j1);
-						}
-					});
+					scoreMain.setText("" + j1.getValeurDeLaMain());
+
+					if (j1.getValeurDeLaMain() > 21) {
+						j1.setJetons(j1.getJetons() - j1.getMise() / 2);
+						j1.perdLaManche();
+						f.dispose();
+						j1.listeCarteDuJoueur = new ArrayList<Carte>();
+						final JFrame f = new JFrame("BlackJack");
+
+						javax.swing.SwingUtilities.invokeLater(new Runnable() {
+							public void run() {
+								new Mise(f, j1);
+							}
+						});
+					}
+
+					doubler.setVisible(false);
 				}
-				
-				
-
-				doubler.setVisible(false);
-			}
-		});
+			});
+		} else {
+			doubler.setVisible(false);
+		}
 
 		// Affichage des jetons
 		jeton.setBounds(815, 530, 250, 266);
