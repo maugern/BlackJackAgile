@@ -60,6 +60,11 @@ public class Croupier {
 		}
 	}
 	
+	public ArrayList<Carte> getListeCarteDuCroupier() {
+		return listeCarteDuCroupier;
+	}
+
+	
 	public boolean isBlackJack(){
 		return getValeurDeLaMain() == 21;
 	}
