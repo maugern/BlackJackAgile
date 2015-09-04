@@ -26,7 +26,7 @@ public class Mise {
 	public Mise(final JFrame f, final Joueur j1) {
 		f.setIconImage(new ImageIcon(getClass().getResource("favicon.png"))
 				.getImage());
-		f.setPreferredSize(new Dimension(200, 300));
+		f.setPreferredSize(new Dimension(250, 400));
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		cagnotte.setText("Votre cagnotte : " + j1.getJetons());
@@ -120,7 +120,7 @@ public class Mise {
 				texte.setFont(new Font("Helvetica", 1, 26));
 				texte.setForeground(Color.ORANGE);
 			}
-			
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				texte.setFont(new Font("Helvetica", 1, 24));
@@ -136,6 +136,14 @@ public class Mise {
 			f.getContentPane().add(augmenter);
 			f.getContentPane().add(texte);
 			f.getContentPane().add(diminuer);
+		} else {
+			f.setLayout(new GridLayout(3, 1));
+			JLabel banniere = new JLabel(new ImageIcon(getClass()
+					.getResource("banniere.png")));
+			JLabel banniere2 = new JLabel(new ImageIcon(getClass()
+					.getResource("banniere.gif")));
+			f.getContentPane().add(banniere);
+			f.getContentPane().add(banniere2);
 		}
 
 		f.pack();
