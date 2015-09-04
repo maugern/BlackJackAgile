@@ -13,7 +13,7 @@ public class Joueur {
 	public ArrayList<Carte> split_2 = new ArrayList<Carte>();
 
 	public Joueur() {
-		this.setJetons(100);
+		this.setJetons(10);
 		this.valeurDeLaMain = 0;
 	}
 
