@@ -219,7 +219,6 @@ public class Jeu {
 					carteC3 = tirer(j1);
 					refreshCarte(carteC3, imageC3);
 
-					j1.setJetons(j1.getJetons() - j1.getMise());
 					j1.setMise(j1.getMise() * 2);
 					
 					mise.setText("" + j1.getMise());

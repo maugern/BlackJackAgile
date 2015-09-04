@@ -98,7 +98,6 @@ public class Mise {
 			public void actionPerformed(ActionEvent e) {
 				if (j1.getJetons() > 0) {
 					j1.setMise(mise);
-					j1.setJetons(j1.getJetons() - mise);
 
 					f.dispose();
 					final JFrame f = new JFrame("BlackJack");
