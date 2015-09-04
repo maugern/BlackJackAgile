@@ -20,9 +20,12 @@ public class Jeu {
 	// Tire une nouvelle carte
 	private JButton tirer = new JButton();
 
-	// Reste dur la table sans piocher
-
+	// Reste sur la table sans piocher
 	private JButton rester = new JButton("Rester");
+
+	// Utilise le "double" (1 carte et double de la mise)
+	private JButton doubler = new JButton("Doubler");
+
 	// Affichage des jetons
 	private JLabel jeton = new JLabel(new ImageIcon(getClass().getResource(
 			"jeton.png")));
@@ -79,6 +82,51 @@ public class Jeu {
 
 		// Gestion du background
 		fond.setLocation(0, 0);
+
+		// Gestion du bouton tirer
+		tirer.setText("Tirer");
+		tirer.setBounds(10, 10, 200, 100);
+		tirer.setBackground(Color.WHITE);
+		tirer.setFocusable(false);
+		tirer.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				if (carteC3.getValeur() == 0) {
+
+					carteC3 = tirer(j1);
+					refreshCarte(carteC3, imageC3);
+
+					scoreMain.setText("" + j1.getValeurDeLaMain());
+				} else if (carteC4.getValeur() == 0) {
+
+					carteC4 = tirer(j1);
+					refreshCarte(carteC4, imageC4);
+
+					scoreMain.setText("" + j1.getValeurDeLaMain());
+				} else if (carteC5.getValeur() == 0) {
+
+					carteC5 = tirer(j1);
+					refreshCarte(carteC5, imageC5);
+
+					scoreMain.setText("" + j1.getValeurDeLaMain());
+				}
+
+				if (j1.getValeurDeLaMain() > 21) {
+					j1.perdLaManche();
+					f.dispose();
+					j1.listeCarteDuJoueur = new ArrayList<Carte>();
+					final JFrame f = new JFrame("BlackJack");
+
+					javax.swing.SwingUtilities.invokeLater(new Runnable() {
+						public void run() {
+							new Mise(f, j1);
+						}
+					});
+				}
+
+				doubler.setVisible(false);
+			}
+		});
 
 		// Gestion du bouton Rester
 		rester.setBounds(10, 120, 200, 100);
@@ -155,38 +203,26 @@ public class Jeu {
 
 				}
 
+				doubler.setVisible(false);
 			}
 		});
 
-		// Gestion du bouton tirer
-		tirer.setText("Tirer");
-		tirer.setBounds(10, 10, 200, 100);
-		tirer.setBackground(Color.WHITE);
-		tirer.setFocusable(false);
-		tirer.addActionListener(new ActionListener() {
+		doubler.setBounds(10, 230, 200, 100);
+		doubler.setBackground(Color.WHITE);
+		doubler.setFocusable(false);
+		doubler.addActionListener(new ActionListener() {
 
-			public void actionPerformed(ActionEvent e) {
-				if (carteC3.getValeur() == 0) {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
 
-					carteC3 = tirer(j1);
-					refreshCarte(carteC3, imageC3);
+				carteC3 = tirer(j1);
+				refreshCarte(carteC3, imageC3);
 
-					scoreMain.setText("" + j1.getValeurDeLaMain());
-				} else if (carteC4.getValeur() == 0) {
-
-					carteC4 = tirer(j1);
-					refreshCarte(carteC4, imageC4);
-
-					scoreMain.setText("" + j1.getValeurDeLaMain());
-				} else if (carteC5.getValeur() == 0) {
-
-					carteC5 = tirer(j1);
-					refreshCarte(carteC5, imageC5);
-
-					scoreMain.setText("" + j1.getValeurDeLaMain());
-				}
+				scoreMain.setText("" + j1.getValeurDeLaMain());
 
 				if (j1.getValeurDeLaMain() > 21) {
+					j1.setJetons(j1.getJetons()-j1.getMise());
+					j1.setMise(j1.getMise() * 2);
 					j1.perdLaManche();
 					f.dispose();
 					j1.listeCarteDuJoueur = new ArrayList<Carte>();
@@ -198,7 +234,10 @@ public class Jeu {
 						}
 					});
 				}
+				
+				
 
+				doubler.setVisible(false);
 			}
 		});
 
@@ -251,6 +290,7 @@ public class Jeu {
 		// Ajoute tous les composants au panel
 		f.getContentPane().add(tirer);
 		f.getContentPane().add(rester);
+		f.getContentPane().add(doubler);
 		f.getContentPane().add(imageC1);
 		f.getContentPane().add(imageC2);
 		f.getContentPane().add(imageC3);

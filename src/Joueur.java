@@ -84,7 +84,10 @@ public class Joueur {
 					valeurDeLaMain += 11;
 					}else{
 						valeurDeLaMain += 1; //si la valeur de la main est superieur a 10, l'as prend pour valeur 1
+						if(valeurDeLaMain > 21 && compteur > 1)
+							valeurDeLaMain -= 10;
 					}
+					
 				}
 				
 			
