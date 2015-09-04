@@ -26,7 +26,6 @@ public class Mise {
 				.getImage());
 		f.setPreferredSize(new Dimension(200, 300));
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setLayout(new GridLayout(4, 1));
 
 		
 		cagnotte.setText("Votre cagnotte : " + j1.getJetons());
@@ -88,9 +87,13 @@ public class Mise {
 		});
 
 		f.getContentPane().add(cagnotte);
-		f.getContentPane().add(augmenter);
-		f.getContentPane().add(texte);
-		f.getContentPane().add(diminuer);
+		
+		if(j1.getJetons() != 0){	
+			f.setLayout(new GridLayout(4, 1));	
+			f.getContentPane().add(augmenter);
+			f.getContentPane().add(texte);
+			f.getContentPane().add(diminuer);
+		}
 
 		f.pack();
 		f.setLocationRelativeTo(null);
