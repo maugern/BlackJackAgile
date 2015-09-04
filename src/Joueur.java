@@ -114,13 +114,18 @@ public class Joueur {
 	
 
 	public void gagneLaManche() {
-		JOptionPane.showMessageDialog (null, "Vous remportez cette manche! \n Vous avez gagné " + mise + "€ !" , "Manche gagné!", JOptionPane.INFORMATION_MESSAGE);
-		
+		JOptionPane.showMessageDialog (null, "Vous remportez cette manche! \n Vous avez gagné " + mise * 2 + "€ !" , "Manche gagné!", JOptionPane.INFORMATION_MESSAGE);
+		setJetons(jetons + mise * 2);
 	}
 
 	public void perdLaManche() {
 		JOptionPane.showMessageDialog (null, "Vous perdez cette manche \n Vous avez perdu " + mise + "€ !" , "Manche perdu!", JOptionPane.INFORMATION_MESSAGE);
 		
+	}
+	
+	public void matchNul() {
+		JOptionPane.showMessageDialog (null, "Vous avez fait match nul \n Vous avez récuperé votre mise de  : " + mise + "€ !" , "Match nul!", JOptionPane.INFORMATION_MESSAGE);
+		setJetons(jetons + mise);
 	}
 
 	public int getJetons() {

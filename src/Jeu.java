@@ -30,7 +30,7 @@ public class Jeu {
 
 	// Affichage du score de la main
 	private JLabel scoreMain = new JLabel();
-	
+
 	// Affichage du score du croupier
 	private JLabel scoreCroupier = new JLabel();
 
@@ -46,6 +46,10 @@ public class Jeu {
 	private JLabel imageC3 = new JLabel();
 	private JLabel imageC4 = new JLabel();
 	private JLabel imageC5 = new JLabel();
+
+	// Dos de carte
+
+	private JLabel imageDos = new JLabel();
 
 	// Cartes du croupier
 	private Carte carteCroupier1 = new Carte();
@@ -85,12 +89,11 @@ public class Jeu {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
-				
 				while (croupier.getValeurDeLaMain() < 17
 						&& carteCroupier5.getValeur() == 0) {
-					
-					if (carteCroupier2.getValeur() == 0) {
 
+					if (carteCroupier2.getValeur() == 0) {
+						imageDos.setVisible(false);
 						carteCroupier2 = tirer();
 						refreshCarte(carteCroupier2, imageCroupier2);
 						scoreCroupier.setText("" + croupier.getValeurDeLaMain());
@@ -111,6 +114,47 @@ public class Jeu {
 						scoreCroupier.setText("" + croupier.getValeurDeLaMain());
 					}
 				}
+
+				if (croupier.getValeurDeLaMain() > 21
+						|| j1.getValeurDeLaMain() > croupier
+								.getValeurDeLaMain()) {
+					j1.gagneLaManche();
+					f.dispose();
+					j1.listeCarteDuJoueur = new ArrayList<Carte>();
+					final JFrame f = new JFrame("BlackJack");
+
+					javax.swing.SwingUtilities.invokeLater(new Runnable() {
+						public void run() {
+							new Mise(f, j1);
+						}
+					});
+				} else if (j1.getValeurDeLaMain() < croupier
+						.getValeurDeLaMain()) {
+					j1.perdLaManche();
+					f.dispose();
+					j1.listeCarteDuJoueur = new ArrayList<Carte>();
+					final JFrame f = new JFrame("BlackJack");
+
+					javax.swing.SwingUtilities.invokeLater(new Runnable() {
+						public void run() {
+							new Mise(f, j1);
+						}
+					});
+				} else if (j1.getValeurDeLaMain() == croupier
+						.getValeurDeLaMain()) {
+					j1.matchNul();
+					f.dispose();
+					j1.listeCarteDuJoueur = new ArrayList<Carte>();
+					final JFrame f = new JFrame("BlackJack");
+
+					javax.swing.SwingUtilities.invokeLater(new Runnable() {
+						public void run() {
+							new Mise(f, j1);
+						}
+					});
+
+				}
+
 			}
 		});
 
@@ -160,9 +204,14 @@ public class Jeu {
 
 		// Affichage des jetons
 		jeton.setBounds(815, 530, 250, 266);
-		
+
 		mise.setText("" + j1.getMise());
 		mise.setBounds(925, 625, 70, 70);
+		if (j1.getMise() > 99) {
+			mise.setBounds(900, 625, 100, 70);
+		} else if (j1.getMise() > 9) {
+			mise.setBounds(915, 625, 80, 70);
+		}
 		mise.setFont(new Font("Helvetica", 0, 48));
 		mise.setForeground(Color.WHITE);
 
@@ -173,6 +222,7 @@ public class Jeu {
 		refreshCarte(carteC2, imageC2);
 		carteCroupier1 = tirer();
 		refreshCarte(carteCroupier1, imageCroupier1);
+		imageDos.setIcon(new ImageIcon(getClass().getResource("dos.png")));
 
 		scoreMain.setText("" + j1.getValeurDeLaMain());
 		scoreMain.setBounds(100, 400, 70, 70);
@@ -190,6 +240,8 @@ public class Jeu {
 		imageC4.setBounds(475, 475, 150, 219);
 		imageC5.setBounds(625, 475, 150, 219);
 
+		imageDos.setBounds(675, 25, 150, 219);
+
 		imageCroupier1.setBounds(825, 25, 150, 219);
 		imageCroupier2.setBounds(675, 25, 150, 219);
 		imageCroupier3.setBounds(525, 25, 150, 219);
@@ -204,6 +256,7 @@ public class Jeu {
 		f.getContentPane().add(imageC3);
 		f.getContentPane().add(imageC4);
 		f.getContentPane().add(imageC5);
+		f.getContentPane().add(imageDos);
 		f.getContentPane().add(imageCroupier1);
 		f.getContentPane().add(imageCroupier2);
 		f.getContentPane().add(imageCroupier3);
@@ -218,6 +271,19 @@ public class Jeu {
 		f.pack();
 		f.setLocationRelativeTo(null);
 		f.setVisible(true);
+
+		if (j1.isBlackJack()) {
+			j1.gagneLaManche();
+			f.dispose();
+			j1.listeCarteDuJoueur = new ArrayList<Carte>();
+			final JFrame f2 = new JFrame("BlackJack");
+
+			javax.swing.SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					new Mise(f2, j1);
+				}
+			});
+		}
 	}
 
 	/*

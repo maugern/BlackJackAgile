@@ -6,6 +6,8 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,7 +29,6 @@ public class Mise {
 		f.setPreferredSize(new Dimension(200, 300));
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		
 		cagnotte.setText("Votre cagnotte : " + j1.getJetons());
 		cagnotte.setFont(new Font("Helvetica", 0, 16));
 		cagnotte.setHorizontalAlignment(JLabel.CENTER);
@@ -40,6 +41,32 @@ public class Mise {
 		texte.setBackground(Color.WHITE);
 		texte.setFocusable(false);
 		texte.setFont(new Font("Helvetica", 1, 24));
+
+		cagnotte.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				mise = j1.getJetons();
+				texte.setText("Mise : " + mise);
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if (j1.getJetons() > 0) {
+					cagnotte.setText("TAPIS");
+					cagnotte.setFont(new Font("Helvetica", 1, 24));
+					cagnotte.setForeground(Color.PINK.darker());
+				}
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				cagnotte.setText("Votre cagnotte : " + j1.getJetons());
+				cagnotte.setFont(new Font("Helvetica", 0, 16));
+				cagnotte.setForeground(Color.BLACK);
+			}
+
+		});
 
 		augmenter.addActionListener(new ActionListener() {
 
@@ -87,9 +114,9 @@ public class Mise {
 		});
 
 		f.getContentPane().add(cagnotte);
-		
-		if(j1.getJetons() != 0){	
-			f.setLayout(new GridLayout(4, 1));	
+
+		if (j1.getJetons() != 0) {
+			f.setLayout(new GridLayout(4, 1));
 			f.getContentPane().add(augmenter);
 			f.getContentPane().add(texte);
 			f.getContentPane().add(diminuer);
