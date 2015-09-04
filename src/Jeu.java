@@ -24,10 +24,15 @@ public class Jeu {
 
 	private JButton rester = new JButton("Rester");
 	// Affichage des jetons
-	private JLabel score = new JLabel();
+	private JLabel jeton = new JLabel(new ImageIcon(getClass().getResource(
+			"jeton.png")));
+	private JLabel mise = new JLabel();
 
 	// Affichage du score de la main
 	private JLabel scoreMain = new JLabel();
+	
+	// Affichage du score du croupier
+	private JLabel scoreCroupier = new JLabel();
 
 	// Carte du joueur
 	private Carte carteC1 = new Carte();
@@ -84,24 +89,26 @@ public class Jeu {
 				while (croupier.getValeurDeLaMain() < 17
 						&& carteCroupier5.getValeur() == 0) {
 					
-					System.out.println(croupier.getValeurDeLaMain());
-					
 					if (carteCroupier2.getValeur() == 0) {
 
 						carteCroupier2 = tirer();
 						refreshCarte(carteCroupier2, imageCroupier2);
+						scoreCroupier.setText("" + croupier.getValeurDeLaMain());
 					} else if (carteCroupier3.getValeur() == 0) {
 
 						carteCroupier3 = tirer();
 						refreshCarte(carteCroupier3, imageCroupier3);
+						scoreCroupier.setText("" + croupier.getValeurDeLaMain());
 					} else if (carteCroupier4.getValeur() == 0) {
 
 						carteCroupier4 = tirer();
 						refreshCarte(carteCroupier4, imageCroupier4);
+						scoreCroupier.setText("" + croupier.getValeurDeLaMain());
 					} else if (carteCroupier5.getValeur() == 0) {
 
 						carteCroupier5 = tirer();
 						refreshCarte(carteCroupier5, imageCroupier5);
+						scoreCroupier.setText("" + croupier.getValeurDeLaMain());
 					}
 				}
 			}
@@ -152,10 +159,12 @@ public class Jeu {
 		});
 
 		// Affichage des jetons
-		score.setText("" + j1.getJetons());
-		score.setBounds(875, 600, 70, 70);
-		score.setFont(new Font("Helvetica", 0, 48));
-		score.setForeground(Color.WHITE);
+		jeton.setBounds(815, 530, 250, 266);
+		
+		mise.setText("" + j1.getMise());
+		mise.setBounds(925, 625, 70, 70);
+		mise.setFont(new Font("Helvetica", 0, 48));
+		mise.setForeground(Color.WHITE);
 
 		// Gestion de l'image de la premi�re carte
 		carteC1 = tirer(j1);
@@ -169,6 +178,11 @@ public class Jeu {
 		scoreMain.setBounds(100, 400, 70, 70);
 		scoreMain.setFont(new Font("Helvetica", 0, 48));
 		scoreMain.setForeground(Color.WHITE);
+
+		scoreCroupier.setText("" + croupier.getValeurDeLaMain());
+		scoreCroupier.setBounds(875, 275, 70, 70);
+		scoreCroupier.setFont(new Font("Helvetica", 0, 48));
+		scoreCroupier.setForeground(Color.WHITE);
 
 		imageC1.setBounds(25, 475, 150, 219);
 		imageC2.setBounds(175, 475, 150, 219);
@@ -195,8 +209,10 @@ public class Jeu {
 		f.getContentPane().add(imageCroupier3);
 		f.getContentPane().add(imageCroupier4);
 		f.getContentPane().add(imageCroupier5);
-		f.getContentPane().add(score);
+		f.getContentPane().add(mise);
 		f.getContentPane().add(scoreMain);
+		f.getContentPane().add(scoreCroupier);
+		f.getContentPane().add(jeton);
 		f.getContentPane().add(fond);
 
 		f.pack();
