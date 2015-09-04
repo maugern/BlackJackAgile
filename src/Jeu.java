@@ -7,10 +7,10 @@ import java.util.Random;
 import javax.swing.*;
 
 public class Jeu {
-	
-	//Création du croupier
+
+	// Création du croupier
 	final Croupier croupier = new Croupier();
-		
+
 	// Contient toutes les cartes mises en jeu
 	private ArrayList<Carte> sabot = new ArrayList<Carte>();
 
@@ -19,16 +19,16 @@ public class Jeu {
 			"fond.jpg")));
 	// Tire une nouvelle carte
 	private JButton tirer = new JButton();
-	
+
 	// Reste dur la table sans piocher
-	
+
 	private JButton rester = new JButton("Rester");
 	// Affichage des jetons
 	private JLabel score = new JLabel();
 
 	// Affichage du score de la main
 	private JLabel scoreMain = new JLabel();
-	
+
 	// Carte du joueur
 	private Carte carteC1 = new Carte();
 	private Carte carteC2 = new Carte();
@@ -70,21 +70,43 @@ public class Jeu {
 
 		// Gestion du background
 		fond.setLocation(0, 0);
-		
-		//Gestion du bouton Rester
+
+		// Gestion du bouton Rester
 		rester.setBounds(10, 120, 200, 100);
 		rester.setBackground(Color.WHITE);
 		rester.setFocusable(false);
 		rester.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+
 				
-				
+				while (croupier.getValeurDeLaMain() < 17
+						&& carteCroupier5.getValeur() == 0) {
+					
+					System.out.println(croupier.getValeurDeLaMain());
+					
+					if (carteCroupier2.getValeur() == 0) {
+
+						carteCroupier2 = tirer();
+						refreshCarte(carteCroupier2, imageCroupier2);
+					} else if (carteCroupier3.getValeur() == 0) {
+
+						carteCroupier3 = tirer();
+						refreshCarte(carteCroupier3, imageCroupier3);
+					} else if (carteCroupier4.getValeur() == 0) {
+
+						carteCroupier4 = tirer();
+						refreshCarte(carteCroupier4, imageCroupier4);
+					} else if (carteCroupier5.getValeur() == 0) {
+
+						carteCroupier5 = tirer();
+						refreshCarte(carteCroupier5, imageCroupier5);
+					}
+				}
 			}
 		});
-				
-				
+
 		// Gestion du bouton tirer
 		tirer.setText("Tirer");
 		tirer.setBounds(10, 10, 200, 100);
@@ -94,40 +116,38 @@ public class Jeu {
 
 			public void actionPerformed(ActionEvent e) {
 				if (carteC3.getValeur() == 0) {
-					
+
 					carteC3 = tirer(j1);
 					refreshCarte(carteC3, imageC3);
 
 					scoreMain.setText("" + j1.getValeurDeLaMain());
-				}
-				else if(carteC4.getValeur() == 0){
-					
+				} else if (carteC4.getValeur() == 0) {
+
 					carteC4 = tirer(j1);
 					refreshCarte(carteC4, imageC4);
 
 					scoreMain.setText("" + j1.getValeurDeLaMain());
-				}
-				else if(carteC5.getValeur() == 0){
-					
+				} else if (carteC5.getValeur() == 0) {
+
 					carteC5 = tirer(j1);
 					refreshCarte(carteC5, imageC5);
 
 					scoreMain.setText("" + j1.getValeurDeLaMain());
 				}
-				
-				if(j1.getValeurDeLaMain() > 21){
-					f.dispose();
+
+				if (j1.getValeurDeLaMain() > 21) {
 					j1.perdLaManche();
+					f.dispose();
 					j1.listeCarteDuJoueur = new ArrayList<Carte>();
 					final JFrame f = new JFrame("BlackJack");
-					
+
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
-							new Mise(f,j1);
+							new Mise(f, j1);
 						}
 					});
 				}
-			
+
 			}
 		});
 
@@ -199,7 +219,7 @@ public class Jeu {
 		Random r = new Random();
 		int index = r.nextInt(sabot.size());
 		Carte c = sabot.get(index);
-		// croupier.pioche(c);
+		croupier.pioche(c);
 		return c;
 	}
 

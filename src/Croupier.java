@@ -11,6 +11,7 @@ public class Croupier {
 	}
 	
 	public int getValeurDeLaMain(){
+		valeurDeLaMain = 0;
 		for(int i = 0; i < listeCarteDuCroupier.size(); i++){
 			if(listeCarteDuCroupier.get(i).getValeur() == 1){ //si c'est un as
 				if(valeurDeLaMain <= 10){ //si la valeur de main est inferieur ou egale a 10, l'as prend pour valeur 11
@@ -18,7 +19,11 @@ public class Croupier {
 				}else{
 					valeurDeLaMain += 1; //si la valeur de la main est superieur a 10, l'as prend pour valeur 1
 				}
-			}else{
+			}else if(listeCarteDuCroupier.get(i).getValeur() >= 10){
+				valeurDeLaMain += 10;
+			}
+			
+			else{
 				valeurDeLaMain += listeCarteDuCroupier.get(i).getValeur();
 			}
 		}
