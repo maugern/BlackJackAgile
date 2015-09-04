@@ -237,6 +237,9 @@ public class Jeu {
 							}
 						});
 					}
+					else {
+						rester.doClick();
+					}
 
 					doubler.setVisible(false);
 				}
